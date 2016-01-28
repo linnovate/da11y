@@ -1,0 +1,4 @@
+name = da11y
+description = Drupal frontend support accessibility.
+core = 7.x
+package = accessibility

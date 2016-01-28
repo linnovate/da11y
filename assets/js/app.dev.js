@@ -3,8 +3,39 @@
  */
 /* global jQuery, PojoA11yOptions */
 
+
+( function() {
+	var is_webkit = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) > -1,
+		is_opera = navigator.userAgent.toLowerCase().indexOf( 'opera' ) > -1,
+		is_ie = navigator.userAgent.toLowerCase().indexOf( 'msie' ) > -1;
+
+	if ( ( is_webkit || is_opera || is_ie ) && document.getElementById && window.addEventListener ) {
+		window.addEventListener( 'hashchange', function() {
+			var id = location.hash.substring( 1 ),
+				element;
+
+			if ( ! ( /^[A-z0-9_-]+$/.test( id ) ) ) {
+				return;
+			}
+
+			element = document.getElementById( id );
+
+			if ( element ) {
+				if ( !( /^(?:a|select|input|button|textarea)$/i.test( element.tagName ) ) ) {
+					element.tabIndex = -1;
+				}
+				element.focus();
+			}
+		}, false );
+	}
+} )();
+
+
+
 ( function( $, window, document, undefined ) {
 	'use strict';
+	
+
 
 	var Pojo_Accessibility_App = {
 		cache: {
@@ -82,7 +113,6 @@
 					$self.cache.$toolbar.find( 'a.pojo-a11y-btn-resize-plus' ).removeClass( 'active' );
 				}
 				
-				$self.cache.$window.trigger( 'resize' );
 			} );
 
 			$self.cache.$btnBackgrounGroup.on( 'click', function( event ) {
@@ -139,7 +169,7 @@
 		},
 
 		handleGlobalOptions: function() {
-			if ( '1' === PojoA11yOptions.focusable ) {
+			/*if ( '1' === PojoA11yOptions.focusable ) {
 				this.cache.$body.addClass( 'pojo-a11y-focusable' );
 			}
 			
@@ -149,7 +179,7 @@
 			
 			if ( '1' === PojoA11yOptions.add_role_links ) {
 				$( 'a' ).attr( 'role', 'link' );
-			}
+			}*/
 		},
 		
 		init: function() {
@@ -161,6 +191,9 @@
 	};
 
 	$( document ).ready( function( $ ) {
+		
+		$('body .access').append('<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation"><div class="pojo-a11y-toolbar-toggle"><a class="pojo-a11y-toolbar-link pojo-a11y-toolbar-toggle-link" href="javascript:void(0);" title="כלי נגישות"><span class="sr-only" title="פתח סרגל נגישות"></span><i class="fa fa-wheelchair"></i></a></div><div class="pojo-a11y-toolbar-overlay"><div class="pojo-a11y-toolbar-inner"><p class="pojo-a11y-toolbar-title">כלי נגישות</p><ul class="pojo-a11y-toolbar-items pojo-a11y-tools"><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a></li></ul></div></div></nav>');
+
 		Pojo_Accessibility_App.init();
 	} );
 
