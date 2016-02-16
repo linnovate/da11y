@@ -91,7 +91,8 @@
 			$self.cache.$toolbar.find( 'a.pojo-a11y-btn-resize-font' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-				var MAX_SIZE = 200,
+				//var MAX_SIZE = 200 ,-------------- original code
+				var MAX_SIZE = 130,
 					MIN_SIZE = 120,
 					action = $( this ).data( 'action' ),
 					oldFontSize = $self.currentFontSize;
@@ -191,8 +192,42 @@
 	};
 
 	$( document ).ready( function( $ ) {
+
+		$('#accessibility-toggle').click(function(){
+			var plugin = $('#accessibility-plugin');
+			plugin.hasClass("active") ? plugin.removeClass("active") : plugin.addClass("active");
+
+			var toggle = $('#accessibility-toggle');
+			toggle.hasClass("active") ? toggle.removeClass("active") : toggle.addClass("active");
+		});
+
+
+		var markap = '<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation">';
+			markap += '<div class="pojo-a11y-toolbar-overlay"><div class="pojo-a11y-toolbar-inner">';
+			markap +=  '<ul class="pojo-a11y-toolbar-items pojo-a11y-tools">';
+			
+			markap +=  '<li class="pojo-a11y-toolbar-item">\
+						    <a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a>\
+						</li>';
+			markap += '<li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a>\
+					</li><li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a>\
+					</li><li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a>\
+					</li>\
+					<li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a>\
+					</li>\
+					<li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a>\
+					</li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a>\
+					</li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a>\
+					</li>';
+
+		markap += '</ul></div></div></nav>';
+
 		
-		$('body .access').append('<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation"><div class="pojo-a11y-toolbar-toggle"><a class="pojo-a11y-toolbar-link pojo-a11y-toolbar-toggle-link" href="javascript:void(0);" title="כלי נגישות"><span class="sr-only" title="פתח סרגל נגישות"></span><i class="fa fa-wheelchair"></i></a></div><div class="pojo-a11y-toolbar-overlay"><div class="pojo-a11y-toolbar-inner"><p class="pojo-a11y-toolbar-title">כלי נגישות</p><ul class="pojo-a11y-toolbar-items pojo-a11y-tools"><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a></li></ul></div></div></nav>');
+		$('body #accessibility-plugin').append(markap);
 
 		Pojo_Accessibility_App.init();
 	} );
