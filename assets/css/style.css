@@ -1659,10 +1659,17 @@ nav#pojo-a11y-toolbar{
   transition:  margin-top 750ms cubic-bezier(0.23, 1, 0.32, 1);
 
 }
+
+#accessibility-toggle{
+    cursor: pointer;
+}
 #accessibility-plugin{
   position:relative;
 }
-
+#accessibility-plugin nav#pojo-a11y-toolbar {
+display:none;
+margin-top:0;
+}
 #accessibility-plugin.active nav#pojo-a11y-toolbar {
-  margin-top:0;
+  display:block;
 }
