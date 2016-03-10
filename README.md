@@ -2,14 +2,17 @@
 ## To use ##
 
 Write only:
-<div id="da11y-plugin"></div>  
+```
+<div id="da11y-plugin"></div>
+``` 
 it set 'toggle' and 'options'
 
 Or:
 in two separate parts that can be in two different places on the site
-
+```
 <div id="da11y-toggle"></div>
 <div id="da11y-options"></div>
+```
 
 ------------------------------------------------------------------------------------------------
 
