@@ -1,3 +1,18 @@
+
+## To use ##
+
+Write only:
+<div id="da11y-plugin"></div>  
+it set 'toggle' and 'options'
+
+Or:
+in two separate parts that can be in two different places on the site
+
+<div id="da11y-toggle"></div>
+<div id="da11y-options"></div>
+
+------------------------------------------------------------------------------------------------
+
 # Pojo Accessibility #
 [![Build Status](https://travis-ci.org/pojome/pojo-accessibility.svg?branch=master)](https://travis-ci.org/pojome/pojo-accessibility) [![Dependency Status](https://david-dm.org/pojome/pojo-accessibility/dev-status.svg)](https://david-dm.org/pojome/pojo-accessibility#info=devDependencies) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 

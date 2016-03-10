@@ -17,12 +17,10 @@
   position: relative;
   display: inline-block;
   position: fixed;
-  top: 100px;
+  top: 110px;
 }
 
-#da11y-options {
-
-}
+#da11y-options {-webkit-box-shadow: 0px 1px 5px 0 rgba(0, 0, 0, 0.58);box-shadow: 0px 1px 5px 0 rgba(0, 0, 0, 0.58);}
 
 #da11y-options nav {
   margin-top: -200%;
@@ -39,6 +37,8 @@
   -webkit-user-select: none;
   user-select: none;
   transition: margin-top .5s;
+  /* -webkit-box-shadow: 1px 1px 4px 0 rgb(0, 0, 0); */
+  /* box-shadow: 1px 1px 14px 0 rgb(0, 0, 0); */
 }
 
 
@@ -86,8 +86,8 @@
   cursor: pointer;
   display: inline-block;
   background: white;
-  -webkit-box-shadow: 1px 1px 3px 0 rgb(0, 0, 0);
-  box-shadow: 1px 1px 3px 0 rgb(0, 0, 0);
+  -webkit-box-shadow: 1px 1px 1px 0 rgb(0, 0, 0);
+  box-shadow: 1px 1px 1px 0 rgb(0, 0, 0);
   border: 1px solid;
   color: black;
   padding: 5px;
@@ -96,6 +96,7 @@
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  font-size: 30px !important;
 }
 #da11y-toggle:before{
   content: "\f193";
@@ -112,8 +113,8 @@
 }
 
 #da11y-toggle.active {
-  -webkit-box-shadow: 1px 1px 3px 0 rgb(0, 0, 0);
-  box-shadow: -1px -1px 1px 0 rgb(149, 147, 147);
+  -webkit-box-shadow: -1px -1px 1px 0 rgb(0, 0, 0);
+  box-shadow: -1px -1px 1px 0 rgb(0, 0, 0);
 }
 
 #da11y-options a.pojo-a11y-toolbar-link:before {

@@ -54,7 +54,8 @@
 			function resizeFont( event ) {
 				event.preventDefault();
 
-				var MAX_SIZE = 200,
+				//var MAX_SIZE = 200 ,-------------- original code
+				var MAX_SIZE = 130,
 					MIN_SIZE = 120,
 					action = $( this ).data( 'action' ),
 					oldFontSize = $self.currentFontSize;
@@ -144,6 +145,7 @@
 	};
 
 	$( document ).ready( function( $ ) {
+
 		var plugin;
 		if(plugin = document.querySelector('#da11y-plugin')) {
 			plugin.innerHTML = '<div id="da11y-toggle"></div><div id="da11y-options"></div>';
@@ -164,30 +166,66 @@
 		}
 		
 		$('#da11y-toggle').click(da11yToggle);
-// 	    $('#da11y-toggle').focus(da11yToggleActive);
 
-	    $('#da11y-options').append(
-			'<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation"><ul>' +
-				'<li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a></li>' +
-				'<li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a><' +
-				'/li><li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a></li>' +
-				'<li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a></li>' +
-				'<li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a></li>' +
-				'<li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li>' +
-				'<li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a></li>' +
-				'<li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a>' +
-				'</li><li class="pojo-a11y-toolbar-item">' +
-				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a></li>' +
-			'</ul></nav>');
+// 	    $('#da11y-options').append(
+// 			'<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation"><ul>' +
+// 				'<li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a></li>' +
+// 				'<li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a><' +
+// 				'/li><li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a></li>' +
+// 				'<li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a></li>' +
+// 				'<li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a></li>' +
+// 				'<li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li>' +
+// 				'<li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a></li>' +
+// 				'<li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a>' +
+// 				'</li><li class="pojo-a11y-toolbar-item">' +
+// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a></li>' +
+// 			'</ul></nav>');
 
+// 		$('#accessibility-toggle').click(function(){
+// 			var plugin = $('#accessibility-plugin');
+// 			plugin.hasClass("active") ? plugin.removeClass("active") : plugin.addClass("active");
+
+// 			var toggle = $('#accessibility-toggle');
+// 			toggle.hasClass("active") ? toggle.removeClass("active") : toggle.addClass("active");
+// 		});
+
+
+		var markap = '<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation">';
+// 			markap += '<div class="pojo-a11y-toolbar-overlay"><div class="pojo-a11y-toolbar-inner">';
+			markap +=  '<ul class="pojo-a11y-toolbar-items pojo-a11y-tools">';
+			
+			markap +=  '<li class="pojo-a11y-toolbar-item">\
+						    <a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a>\
+						</li>';
+			markap += '<li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a>\
+					</li><li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a>\
+					</li><li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a>\
+					</li>\
+					<li class="pojo-a11y-toolbar-item">\
+					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a>\
+					</li>\
+					<li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a>\
+					</li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a>\
+					</li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a>\
+					</li>';
+
+		markap += '</ul></nav>';//</div></div>
+
+		
+// 		$('body #accessibility-plugin').append(markap);
+		$('#da11y-options').append(markap);
+		
 		Pojo_Accessibility_App.init();
 	});
 
