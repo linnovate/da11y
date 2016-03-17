@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the PHP Console module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function da11y_install() {
+
+  variable_set('da11y_setting', '');
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function da11y_uninstall() {
+
+  variable_del('da11y_setting');
+
+}

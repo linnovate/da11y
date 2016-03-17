@@ -43,52 +43,65 @@
 
 		cacheElements: function() {
 			this.cache.$toolbar = $( '#pojo-a11y-toolbar' );
-			this.cache.$toolbarLinks = this.cache.$toolbar.find( 'div.pojo-a11y-toolbar-overlay a.pojo-a11y-toolbar-link' );
-			this.cache.$btnBackgrounGroup = this.cache.$toolbar.find( 'a.pojo-a11y-btn-background-group' );
+			this.cache.$btnBackgrounGroup = this.cache.$toolbar.find( 'a[class*="da11y_bg_"]' );
 			this.cache.$body = $( 'body' );
 		},
 
 		bindToolbarButtons: function() {
 			var $self = this;
 
-			function resizeFont( event ) {
+			function resizeFontPlus( event ) {
 				event.preventDefault();
 
 				//var MAX_SIZE = 200 ,-------------- original code
 				var MAX_SIZE = 130,
 					MIN_SIZE = 120,
-					action = $( this ).data( 'action' ),
 					oldFontSize = $self.currentFontSize;
 
-				if ( 'plus' === action && MAX_SIZE > oldFontSize ) {
+				if (MAX_SIZE > oldFontSize )
 					$self.currentFontSize += 10;
-				}
-
-				if ( 'minus' === action && MIN_SIZE < oldFontSize ) {
-					$self.currentFontSize -= 10;
-				}
 
 				$self.cache.$body.removeClass( 'pojo-a11y-resize-font-' + oldFontSize );
 
 				if ( 120 !== $self.currentFontSize ) {
-					$self.cache.$toolbar.find( 'a.pojo-a11y-btn-resize-plus' ).addClass( 'active' );
+					$self.cache.$toolbar.find( 'a.da11y_resize_font_plus' ).addClass( 'active' );
 					$self.cache.$body.addClass( 'pojo-a11y-resize-font-' + $self.currentFontSize );
 				} else {
-					$self.cache.$toolbar.find( 'a.pojo-a11y-btn-resize-plus' ).removeClass( 'active' );
+					$self.cache.$toolbar.find( 'a.da11y_resize_font_plus' ).removeClass( 'active' );
 				}
-				
+			}
+
+			function resizeFontMinus( event ) {
+				event.preventDefault();
+
+				//var MAX_SIZE = 200 ,-------------- original code
+				var MAX_SIZE = 130,
+					MIN_SIZE = 120,
+					oldFontSize = $self.currentFontSize;
+
+				if (MIN_SIZE < oldFontSize )
+					$self.currentFontSize -= 10;
+
+				$self.cache.$body.removeClass( 'pojo-a11y-resize-font-' + oldFontSize );
+
+				if ( 120 !== $self.currentFontSize ) {
+					$self.cache.$toolbar.find( 'a.da11y_resize_font_plus' ).addClass( 'active' );
+					$self.cache.$body.addClass( 'pojo-a11y-resize-font-' + $self.currentFontSize );
+				} else {
+					$self.cache.$toolbar.find( 'a.da11y_resize_font_plus' ).removeClass( 'active' );
+				}
 			}
 			
 			function backgrounGroup( event ) {
 				event.preventDefault();
 				
-				var currentAction = $( this ).data( 'action' ),
+				var currentAction = this.classList[0].substring(9),
 					isButtonActive = $( this ).hasClass( 'active' ),
 					bodyClasses = {
 						'grayscale': 'pojo-a11y-grayscale',
 						'high_contrast': 'pojo-a11y-high-contrast',
 						'negative_contrast': 'pojo-a11y-negative-contrast',
-						'light-bg': 'pojo-a11y-light-background'
+						'light': 'pojo-a11y-light-background'
 					};
 				
 				$.each( bodyClasses, function( action, bodyClass ) {
@@ -122,19 +135,20 @@
 				event.preventDefault();
 
 				$self.cache.$body.removeClass( 'pojo-a11y-grayscale pojo-a11y-high-contrast pojo-a11y-negative-contrast pojo-a11y-light-background pojo-a11y-links-underline pojo-a11y-readable-font' );
-				$self.cache.$toolbarLinks.removeClass( 'active' );
-				
+				$self.cache.$toolbar.find( 'a' ).removeClass( 'active' );
+
 				var MIN_SIZE = 120;
 				$self.cache.$body.removeClass( 'pojo-a11y-resize-font-' + $self.currentFontSize );
 				$self.currentFontSize = MIN_SIZE;
 			}
 
 			$self.currentFontSize = 120;
-			$self.cache.$toolbar.find( 'a.pojo-a11y-btn-resize-font' ).click(resizeFont);
-			$self.cache.$btnBackgrounGroup.click(backgrounGroup);
-			$self.cache.$toolbar.find( 'a.pojo-a11y-btn-links-underline' ).click(linksUnderline);
-			$self.cache.$toolbar.find( 'a.pojo-a11y-btn-readable-font' ).click(readableFont);
-			$self.cache.$toolbar.find( 'a.pojo-a11y-btn-reset' ).click(reset);
+			$self.cache.$toolbar.find( 'a.da11y_resize_font_plus' ).click(resizeFontPlus);
+			$self.cache.$toolbar.find( 'a.da11y_resize_font_minus' ).click(resizeFontMinus);
+			$self.cache.$toolbar.find( 'a[class*="da11y_bg_"]' ).click(backgrounGroup);
+			$self.cache.$toolbar.find( 'a.da11y_links_underline' ).click(linksUnderline);
+			$self.cache.$toolbar.find( 'a.da11y_readable_font' ).click(readableFont);
+			$self.cache.$toolbar.find( 'a.da11y_reset' ).click(reset);
 		},
 
 		
@@ -167,63 +181,23 @@
 		
 		$('#da11y-toggle').click(da11yToggle);
 
-// 	    $('#da11y-options').append(
-// 			'<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation"><ul>' +
-// 				'<li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a></li>' +
-// 				'<li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a><' +
-// 				'/li><li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a></li>' +
-// 				'<li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a></li>' +
-// 				'<li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a></li>' +
-// 				'<li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li>' +
-// 				'<li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a></li>' +
-// 				'<li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a>' +
-// 				'</li><li class="pojo-a11y-toolbar-item">' +
-// 				'<a tabindex="0" href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a></li>' +
-// 			'</ul></nav>');
-
-// 		$('#accessibility-toggle').click(function(){
-// 			var plugin = $('#accessibility-plugin');
-// 			plugin.hasClass("active") ? plugin.removeClass("active") : plugin.addClass("active");
-
-// 			var toggle = $('#accessibility-toggle');
-// 			toggle.hasClass("active") ? toggle.removeClass("active") : toggle.addClass("active");
-// 		});
-
-
+		var da11y_setting = Drupal.settings.da11y_setting;
+		var url_title = '';
 		var markap = '<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation">';
-// 			markap += '<div class="pojo-a11y-toolbar-overlay"><div class="pojo-a11y-toolbar-inner">';
-			markap +=  '<ul class="pojo-a11y-toolbar-items pojo-a11y-tools">';
-			
-			markap +=  '<li class="pojo-a11y-toolbar-item">\
-						    <a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-plus" data-action="plus" tabindex="-1">הגדל טקסט</a>\
-						</li>';
-			markap += '<li class="pojo-a11y-toolbar-item">\
-					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-resize-font pojo-a11y-btn-resize-minus" data-action="minus" tabindex="-1">הקטן טקסט</a>\
-					</li><li class="pojo-a11y-toolbar-item">\
-					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-grayscale" data-action="grayscale" tabindex="-1">גווני אפור</a>\
-					</li><li class="pojo-a11y-toolbar-item">\
-					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-high-contrast" data-action="high_contrast" tabindex="-1">ניגודיות גבוהה</a>\
-					</li>\
-					<li class="pojo-a11y-toolbar-item">\
-					<a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-negative-contrast" data-action="negative_contrast" tabindex="-1">ניגודיות הפוכה</a>\
-					</li>\
-					<li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-background-group pojo-a11y-btn-light-bg" data-action="light-bg" tabindex="-1">רקע בהיר</a></li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-links-underline" tabindex="-1">הדגשת קישורים</a>\
-					</li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-readable-font" tabindex="-1">פונט קריא</a>\
-					</li><li class="pojo-a11y-toolbar-item"><a href="#" class="pojo-a11y-toolbar-link pojo-a11y-btn-reset" tabindex="-1">איפוס</a>\
-					</li>';
+			markap +=  '<ul class="da11y-items pojo-a11y-tools">';
+			for(var key in da11y_setting) {
+				if(key.indexOf('da11y_') != -1 && da11y_setting[key] != ''){
+					markap += '<li><a href="#" class="' + key + '">' + da11y_setting[key] + '</a></li>';
+				}
+				if(key.indexOf('da11yLink_') != -1 && key.indexOf('_title') != -1 && da11y_setting[key] != ''){
+					url_title = da11y_setting[key];
+				}
+				if(key.indexOf('da11yLink_') != -1 && key.indexOf('_url') != -1 &&  da11y_setting[key] != ''){
+					markap += '<li><a href="'+ da11y_setting[key] +'" class="' + key + '">' + url_title + '</a></li>';
+				}
+			}
+		markap += '</ul></nav>';
 
-		markap += '</ul></nav>';//</div></div>
-
-		
-// 		$('body #accessibility-plugin').append(markap);
 		$('#da11y-options').append(markap);
 		
 		Pojo_Accessibility_App.init();

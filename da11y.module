@@ -7,6 +7,28 @@
 function da11y_init() {
 	drupal_add_css(drupal_get_path('module', 'da11y') . '/assets/css/style.css');
 	drupal_add_js(drupal_get_path('module', 'da11y') . '/assets/js/app.dev.js');
+	
+	drupal_add_js(array(
+		'da11y_setting' => variable_get('da11y_setting','')
+	), 'setting');
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+
+function da11y_menu() {
+  $items['admin/config/da11y'] = array(
+    'title' => 'Da11y Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('da11y_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'da11y_settings.admin.inc',
+    'type' => MENU_NORMAL_ITEM
+  );
+
+  return $items;
 }
 
 
