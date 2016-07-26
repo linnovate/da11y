@@ -12,6 +12,24 @@
   font-style: normal
 }
 
+#da11y-credits {
+  text-align: center;
+  font-size: 14px !important;
+}
+
+#da11y-credits hr {
+  border-color: black;
+}
+
+#da11y-options #da11y-credits a:before {
+  display: none;
+}
+
+#da11y-options #da11y-credits a {
+  display: inline;
+  padding: 8px;
+  color: #428bca;
+}
 
 #da11y-plugin {
   position: relative;

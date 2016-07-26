@@ -3,6 +3,9 @@
  */
 /* global jQuery, PojoA11yOptions */
 
+var credits = '<div id="da11y-credits"><hr>\
+			   <a href="http://drupalorg/project/da11y">Da11y</a> by\
+               <a href="http://www.linnovate.net">Linnovate</a></div>';
 
 ( function() {
 	var is_webkit = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) > -1,
@@ -183,22 +186,25 @@
 
 		var da11y_setting = Drupal.settings.da11y_setting;
 		var url_title = '';
-		var markap = '<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation">';
-			markap +=  '<ul class="da11y-items pojo-a11y-tools">';
+		var markup = '<nav id="pojo-a11y-toolbar" class="pojo-a11y-toolbar-left" role="navigation">';
+			markup +=  '<ul class="da11y-items pojo-a11y-tools">';
 			for(var key in da11y_setting) {
 				if(key.indexOf('da11y_') != -1 && da11y_setting[key] != ''){
-					markap += '<li><a href="#" class="' + key + '">' + da11y_setting[key] + '</a></li>';
+					markup += '<li><a href="#" class="' + key + '">' + da11y_setting[key] + '</a></li>';
 				}
 				if(key.indexOf('da11yLink_') != -1 && key.indexOf('_title') != -1 && da11y_setting[key] != ''){
 					url_title = da11y_setting[key];
 				}
 				if(key.indexOf('da11yLink_') != -1 && key.indexOf('_url') != -1 &&  da11y_setting[key] != ''){
-					markap += '<li><a href="'+ da11y_setting[key] +'" class="' + key + '">' + url_title + '</a></li>';
+					markup += '<li><a href="'+ da11y_setting[key] +'" class="' + key + '">' + url_title + '</a></li>';
 				}
 			}
-		markap += '</ul></nav>';
 
-		$('#da11y-options').append(markap);
+		markup += '</ul>';
+        markup +=  credits;
+		markup += '</nav>';
+
+		$('#da11y-options').append(markup);
 		
 		Pojo_Accessibility_App.init();
 	});
