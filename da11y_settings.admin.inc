@@ -13,14 +13,14 @@ function da11y_admin_settings($form, &$form_state) {
 
   $fields = array(
   //  'da11y_toolbar_title' => 'Title top of the toolbar',
-    'da11y_resize_font_plus' => 'Increase',
-    'da11y_resize_font_minus' => 'Decrease',
-    'da11y_bg_grayscale' => 'Grayscale',
-    'da11y_bg_high_contrast' => 'High Contrast',
-    'da11y_bg_negative_contrast' => 'Negative Contrast',
-    'da11y_bg_light' => 'Light Background',
-    'da11y_links_underline' => 'Links Underline',
-    'da11y_readable_font' => 'Readable Font',
+    'da11y_resize_font_plus' => t('Increase'),
+    'da11y_resize_font_minus' => t('Decrease'),
+    'da11y_bg_grayscale' => t('Grayscale'),
+    'da11y_bg_high_contrast' => t('High Contrast'),
+    'da11y_bg_negative_contrast' => t('Negative Contrast'),
+    'da11y_bg_light' => t('Light Background'),
+    'da11y_links_underline' => t('Links Underline'),
+    'da11y_readable_font' => t('Readable Font'),
     'da11y_reset' => 'Reset',
   );
 
