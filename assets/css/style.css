@@ -90,6 +90,8 @@
 
 #da11y-options a:hover,
 #da11y-options a:focus {background-color: #F9F9F9;outline: 1px solid #757575;}
+#da11y-options #da11y-credits a:hover,
+#da11y-options #da11y-credits a:focus {background-color: transparent;outline: outline: none;}
 #da11y-options a.active {
   background-color: #EAEAEA;
 }
