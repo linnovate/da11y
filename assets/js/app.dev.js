@@ -4,8 +4,8 @@
 /* global jQuery, PojoA11yOptions */
 
 var credits = '<div id="da11y-credits"><hr>\
-			   <a href="http://drupalorg/project/da11y">Da11y</a> by\
-               <a href="http://www.linnovate.net">Linnovate</a></div>';
+			   <a href="http://drupalorg/project/da11y">Drupal Accessability</a>\
+               By<a href="http://www.linnovate.net">Linnovate</a></div>';
 
 ( function() {
 	var is_webkit = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) > -1,
